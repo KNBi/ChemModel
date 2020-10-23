@@ -1,0 +1,11 @@
+        table, th, td {
+          border: 5px solid white;
+          border-collapse: collapse;
+        }
+        th, td {
+          padding: 15px;
+        }
+
+        body {
+            background-image: url('../img/polygon.jpg'); <!-- from: https://all-free-download.com/free-vector/connection.html --!>
+        }

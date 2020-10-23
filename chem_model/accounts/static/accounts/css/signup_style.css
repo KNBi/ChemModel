@@ -1,0 +1,17 @@
+        .main {
+            vertical-align: middle;
+            text-align: center;
+            height: 500px;
+            width: 500px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -250px;
+            margin-top: -250px;
+            background: white;
+            animation-name: main_animation;
+            animation-duration: 1.5s;
+        }
+        body {
+            background-image: url('../img/polygon.jpg'); <!-- from: https://all-free-download.com/free-vector/connection.html --!>
+        }

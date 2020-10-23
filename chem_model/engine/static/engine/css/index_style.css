@@ -1,0 +1,35 @@
+        .main {
+            vertical-align: middle;
+            text-align: center;
+            height: 200px;
+            width: 400px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -200px;
+            margin-top: -10px;
+            background: white;
+            animation-name: main_animation;
+            animation-duration: 1.5s;
+        }
+        .center_results{
+            text-align: center;
+            vertical-align: middle;
+            position: absolute;
+            margin-left: -320px;
+            left: 50%;
+        }
+        .info {
+            vertical-align: middle;
+            text-align: center;
+            height: 300px;
+            width: 800px;
+            position: absolute;
+            margin-left: -400px;
+            left: 50%;
+            top: 10%;
+            background: white;
+        }
+        body {
+            background-image: url('../img/polygon.jpg'); <!-- from: https://all-free-download.com/free-vector/connection.html --!>
+        }

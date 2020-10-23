@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    {% load static %}
+    {% if not out %}
+      <title>Main page</title>
+    {% else %}
+      <title>Results</title>
+    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'engine/css/index_style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'engine/css/navbar_style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'engine/css/main_animation.css' %}">
+  </head>
+
+  <body>
+    <div class="topnav">
+      <a href="/">Home</a>
+      <a href="/FAQ">FAQ</a>
+      {% if request.user.is_authenticated %}
+        <a href="/previous_results">Previous results</a>
+      {% endif %}
+      {% if not request.user.is_authenticated %}
+        <a href="/accounts/login">Login</a>
+        <a href="/accounts/signup">Sign up</a>
+      {% endif %}
+      <div class="logout_button">
+        {% if request.user.is_authenticated %}
+            <form method="post", action="{% url 'accounts:logout' %}">
+              {% csrf_token %}
+              <button type="submit">Logout</button>
+            </form>
+        {% endif %}
+      </div>
+    </div>
+    {% if out %}
+    <form action="/">
+      <input type="submit" value="Back to the main page" />
+    </form>
+    <div class ="center_results">
+      <h2><font color ="white">Your results for {{formula}}:</font></h2><br>
+      <h3><font color ="white">Calculated: {{results_counter}} result(s)</font></h3><br>
+      <ul style="list-style-type:none;">
+        {%for i in out %}
+          <li><img src="data:image/png;base64,{{i}}"></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+      {% else %}
+        <div class="info">
+          <h1>Welcome on Chem Model site!</h1>
+          Our project allows converting chemical formula to its structural shape. We strongly advise to look up our FAQ page before first use. However if You want to use our page now, there are some rules: </br>
+          </br>
+          - formula field is case sensitive, eg. CH4 is <b>not equal</b> to cH4 or ch4 </br>
+          - You need to write all your formulas with <b>capital letters</b>, eg: CH4, C2H5OH, <b>but</b> CH3Cl, CH3Br </br>
+          - after pressing "Calculate" page will try to reload, which is normal. This is an indicator that algorithm is working </br>
+          - our solution use only <b>some elements</b>, look up FAQ page to learn more </br>
+          - you can log in / sign up to save your results for later </br>
+        </div>
+        <div class="main">
+          <h2>Welcome!</h2>
+          <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">Calculate</button>
+          </form>
+        </div>
+    {% endif %}
+  </body>
+</html>

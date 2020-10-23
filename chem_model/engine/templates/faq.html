@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'engine/css/faq_style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'engine/css/navbar_style.css' %}">
+    <meta charset="UTF-8">
+    <title>FAQ</title>
+</head>
+<body>
+     <div class="topnav">
+         <a href="/">Home</a>
+         <a href="/FAQ">FAQ</a>
+         {% if request.user.is_authenticated %}
+            <a href="/previous_results">Previous results</a>
+         {% endif %}
+         {% if not request.user.is_authenticated %}
+              <a href="/accounts/login">Login</a>
+              <a href="/accounts/signup">Sign up</a>
+         {% endif %}
+         <div class="logout_button">
+            {% if request.user.is_authenticated %}
+                <form method="post", action="{% url 'accounts:logout' %}">
+                  {% csrf_token %}
+                  <button type="submit">Logout</button>
+                </form>
+            {% endif %}
+         </div>
+    </div>
+    <div class="main">
+        <h1>FAQ</h1>
+        <h3>Short manual</h3>
+          - in field on the main page you can write your formula, following rules above this field </br>
+          - do not click on any other element on page when You press "Calculate", this will stop calculating results </br>
+          - page will stop trying to reload when algorithm finishes calculating </br>
+          - results will be presented to You </br>
+        <h3>1. For which elements does the platform works?</h3>
+        - For now application works for:</br>
+            H, C, N, O, P, Na, K, Br, I, F, Cl, S, Li
+
+        <h3>2. Does the solution work for both organic and inorganic substances?</h3>
+        - No, for now solution works only for organic substances.
+
+        <h3>3. Does the solution return all possible results?</h3>
+        - No, solutions follows some rules when calculating results.
+
+        <h3>4. Which rules?</h3>
+        - carbon atom doesn't bond with nitrogen atom by oxygen atom </br>
+        - sulfur atom doesn't bond with nitrogen atom </br>
+        - oxygen, nitrogen and sulfur atoms don't bond with halogens </br>
+    </div>
+</body>
+</html>
