@@ -3,7 +3,7 @@ import os
 from ctypes import cdll, c_char
 
 
-def call_c(formula):
+def call_c2(formula):
     try:
         graph = subprocess.check_output(args=["engine\\utils\\projekt_lic.exe"])
 
@@ -17,11 +17,10 @@ def call_c(formula):
     return graph
 
 
-def call_c2(formula):
-    lic_lib = cdll.LoadLibrary("engine\\utils\\lic.so")
+def call_c(formula):
+    lic_lib = cdll.LoadLibrary("engine/utils/lic.so")
     graph_algorithm = lic_lib.main
     graph_algorithm.restype = c_char
-    #tmp = hello()
     graph_algorithm()
 
     graphs = []

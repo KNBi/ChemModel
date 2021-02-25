@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+    db:
+        image: postgres
+        environment:
+            - POSTGRES_DB=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+    chem_model:
+        build:
+            context: .
+            dockerfile: docker/python/Dockerfile
+        restart: on-failure
+        command: bash -c "g++ -fPIC -shared -o engine/utils/lic.so engine/utils/lic.cpp && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+        volumes:
+            - ./chem_model:/chem_model
+        ports:
+            - 8000:8000
+        links:
+            - db
